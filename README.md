@@ -210,7 +210,7 @@
 
           $InvokePSThreadResult = Invoke-PSThread @InvokePSThreadParameters
 
-          #Do some additional code here
+          #Do some additional work here before beginning to wait for your runspace pool to be completed.
 
           $InvokePSThreadParameters = New-Object -TypeName 'System.Collections.Specialized.OrderedDictionary'
 	          $InvokePSThreadParameters.Await = $True
