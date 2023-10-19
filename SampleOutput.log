@@ -1,0 +1,79 @@
+VERBOSE: 10/19/2023 16:42:47.087 - Function 'Invoke-PSThread' is beginning. Please Wait...
+VERBOSE: 10/19/2023 16:42:47.115 - Available Function Parameter(s) = -Runspace:SwitchParameter, -RunspacePool:SwitchParameter, -Await:SwitchParameter, -RunspaceDefinition:ScriptBlock, -RunspaceParameters:Ordered
+Dictionary, -InputObjectList:Object[], -SynchronizedHashtable:PSVariable, -AssemblyList:SessionStateAssemblyEntry[], -FunctionList:FunctionInfo[], -ModuleList:PSModuleInfo[], -VariableList:PSVariable[], -ThreadL
+ist:PSObject[], -LoopTimeout:TimeSpan, -LoopDuration:TimeSpan, -WaitForAvailableRunspace:SwitchParameter, -ContinueOnError:SwitchParameter
+VERBOSE: 10/19/2023 16:42:47.146 - Supplied Function Parameter(s) = -RunspacePool:SwitchParameter, -InputObjectList:Object[], -RunspaceDefinition:ScriptBlock, -RunspaceParameters:OrderedDictionary, -Synchronized
+Hashtable:PSVariable, Uknown:Unknown, Uknown:Unknown, Uknown:Unknown, -ContinueOnError:SwitchParameter, -Verbose:SwitchParameter
+VERBOSE: 10/19/2023 16:42:47.162 - Execution of Invoke-PSThread began on Thursday, October 19, 2023 @ 04:42:47.087 PM
+VERBOSE: 10/19/2023 16:42:47.164 - Parameter Set Name: RunspacePool
+VERBOSE: 10/19/2023 16:42:47.293 - Attempting to open a new runspace pool. Please Wait... [Minimum Runspaces: 1] [Maximum Runspaces: 12]
+VERBOSE: 10/19/2023 16:42:47.311 - Attempting to create a new runspace for input object list item 1 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: 10/19/2023 16:42:47.344 - Attempting to create a new runspace for input object list item 2 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: Attempting to begin thread ID "18088". Please Wait...
+VERBOSE: Attempting to begin thread ID "34972". Please Wait...
+VERBOSE: 10/19/2023 16:42:47.371 - Attempting to create a new runspace for input object list item 3 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: Attempting to begin thread ID "2968". Please Wait...
+VERBOSE: 10/19/2023 16:42:47.401 - Attempting to create a new runspace for input object list item 4 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: Attempting to begin thread ID "24612". Please Wait...
+VERBOSE: 10/19/2023 16:42:47.438 - Attempting to create a new runspace for input object list item 5 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: Attempting to begin thread ID "31404". Please Wait...
+VERBOSE: 10/19/2023 16:42:47.462 - Attempting to create a new runspace for input object list item 6 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: Attempting to begin thread ID "18872". Please Wait...
+VERBOSE: 10/19/2023 16:42:47.528 - Attempting to create a new runspace for input object list item 7 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: Attempting to begin thread ID "27432". Please Wait...
+VERBOSE: 10/19/2023 16:42:47.569 - Attempting to create a new runspace for input object list item 8 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: Attempting to begin thread ID "20304". Please Wait...
+VERBOSE: 10/19/2023 16:42:47.594 - Attempting to create a new runspace for input object list item 9 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: Attempting to begin thread ID "39640". Please Wait...
+VERBOSE: 10/19/2023 16:42:47.637 - Attempting to create a new runspace for input object list item 10 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: Attempting to begin thread ID "33964". Please Wait...
+VERBOSE: 10/19/2023 16:42:47.664 - Attempting to create a new runspace for input object list item 11 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: Attempting to begin thread ID "19392". Please Wait...
+VERBOSE: 10/19/2023 16:42:47.716 - Attempting to create a new runspace for input object list item 12 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: Attempting to begin thread ID "38956". Please Wait...
+VERBOSE: 10/19/2023 16:42:47.744 - Attempting to create a new runspace for input object list item 13 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: 10/19/2023 16:42:47.757 - Attempting to create a new runspace for input object list item 14 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: 10/19/2023 16:42:47.761 - Attempting to create a new runspace for input object list item 15 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: 10/19/2023 16:42:47.763 - Execution of Invoke-PSThread ended on Thursday, October 19, 2023 @ 04:42:47.763 PM
+VERBOSE: 10/19/2023 16:42:47.764 - Function execution took 0 hour(s), 0 minute(s), 0 second(s), and 676 millisecond(s)
+VERBOSE: 10/19/2023 16:42:47.767 - Function 'Invoke-PSThread' is completed.
+VERBOSE: 10/19/2023 16:42:47.771 - Function 'Invoke-PSThread' is beginning. Please Wait...
+VERBOSE: 10/19/2023 16:42:47.778 - Available Function Parameter(s) = -Runspace:SwitchParameter, -RunspacePool:SwitchParameter, -Await:SwitchParameter, -RunspaceDefinition:ScriptBlock, -RunspaceParameters:Ordered
+Dictionary, -InputObjectList:Object[], -SynchronizedHashtable:PSVariable, -AssemblyList:SessionStateAssemblyEntry[], -FunctionList:FunctionInfo[], -ModuleList:PSModuleInfo[], -VariableList:PSVariable[], -ThreadL
+ist:PSObject[], -LoopTimeout:TimeSpan, -LoopDuration:TimeSpan, -WaitForAvailableRunspace:SwitchParameter, -ContinueOnError:SwitchParameter
+VERBOSE: 10/19/2023 16:42:47.782 - Supplied Function Parameter(s) = -Await:SwitchParameter, -ThreadList:PSObject[], -LoopTimeout:TimeSpan, -LoopDuration:TimeSpan, -ContinueOnError:SwitchParameter, -Verbose:Switc
+hParameter
+VERBOSE: 10/19/2023 16:42:47.782 - Execution of Invoke-PSThread began on Thursday, October 19, 2023 @ 04:42:47.771 PM
+VERBOSE: 10/19/2023 16:42:47.784 - Parameter Set Name: Await
+VERBOSE: 10/19/2023 16:42:47.799 - Loop Timeout: 0 day(s), 1 hour(s), 0 minute(s), 0 second(s), and 0 millisecond(s)
+VERBOSE: 10/19/2023 16:42:47.8 - Current Time: Thursday, October 19, 2023 @ 04:42:47.8 PM
+VERBOSE: 10/19/2023 16:42:47.804 - Loop Timeout Time: Thursday, October 19, 2023 @ 05:42:47.8 PM
+VERBOSE: 10/19/2023 16:42:47.806 - Elasped Time: 0 day(s), 0 hour(s), 0 minute(s), 0 second(s), and 0 millisecond(s)
+VERBOSE: 10/19/2023 16:42:47.812 - Total Threads: 15
+VERBOSE: 10/19/2023 16:42:47.815 - Completed Threads: 0
+VERBOSE: 10/19/2023 16:42:47.815 - Incomplete Threads: 15
+VERBOSE: 10/19/2023 16:42:47.817 - Thread Completion Percentage: 0%
+VERBOSE: 10/19/2023 16:42:47.817 - Thread Incompletion Percentage: 100%
+VERBOSE: 10/19/2023 16:42:47.819 - Checking again in: 0 day(s), 0 hour(s), 0 minute(s), 15 second(s), and 0 millisecond(s)
+VERBOSE: Attempting to begin thread ID "24612". Please Wait...
+VERBOSE: Attempting to begin thread ID "38956". Please Wait...
+VERBOSE: Attempting to begin thread ID "20304". Please Wait...
+VERBOSE: 10/19/2023 16:43:02.827 - Elasped Time: 0 day(s), 0 hour(s), 0 minute(s), 15 second(s), and 21 millisecond(s)
+VERBOSE: 10/19/2023 16:43:02.831 - Total Threads: 15
+VERBOSE: 10/19/2023 16:43:02.831 - Completed Threads: 4
+VERBOSE: 10/19/2023 16:43:02.832 - Incomplete Threads: 11
+VERBOSE: 10/19/2023 16:43:02.833 - Thread Completion Percentage: 26.67%
+VERBOSE: 10/19/2023 16:43:02.833 - Thread Incompletion Percentage: 73.33%
+VERBOSE: 10/19/2023 16:43:02.834 - Checking again in: 0 day(s), 0 hour(s), 0 minute(s), 15 second(s), and 0 millisecond(s)
+VERBOSE: 10/19/2023 16:43:17.85 - Elasped Time: 0 day(s), 0 hour(s), 0 minute(s), 30 second(s), and 44 millisecond(s)
+VERBOSE: 10/19/2023 16:43:17.852 - Total Threads: 15
+VERBOSE: 10/19/2023 16:43:17.853 - Completed Threads: 14
+VERBOSE: 10/19/2023 16:43:17.854 - Incomplete Threads: 1
+VERBOSE: 10/19/2023 16:43:17.854 - Thread Completion Percentage: 93.33%
+VERBOSE: 10/19/2023 16:43:17.855 - Thread Incompletion Percentage: 6.67%
+VERBOSE: 10/19/2023 16:43:17.855 - Checking again in: 0 day(s), 0 hour(s), 0 minute(s), 15 second(s), and 0 millisecond(s)
+VERBOSE: 10/19/2023 16:43:32.867 - Elasped Time: 0 day(s), 0 hour(s), 0 minute(s), 45 second(s), and 61 millisecond(s)
+VERBOSE: 10/19/2023 16:43:32.869 - All 15 background thread(s) have been completed. Terminating loop. Please Wait...
+VERBOSE: 10/19/2023 16:43:32.876 - Execution of Invoke-PSThread ended on Thursday, October 19, 2023 @ 04:43:32.876 PM
+VERBOSE: 10/19/2023 16:43:32.882 - Function execution took 0 hour(s), 0 minute(s), 45 second(s), and 105 millisecond(s)
+VERBOSE: 10/19/2023 16:43:32.883 - Function 'Invoke-PSThread' is completed.
