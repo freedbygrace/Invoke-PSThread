@@ -1,10 +1,3 @@
----
-external help file: -help.xml
-Module Name: 
-online version: 
-schema: 2.0.0
----
-
 # Invoke-PSThread
 
 ## SYNOPSIS
