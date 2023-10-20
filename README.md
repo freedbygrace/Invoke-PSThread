@@ -1,3 +1,10 @@
+---
+external help file: -help.xml
+Module Name: 
+online version: 
+schema: 2.0.0
+---
+
 # Invoke-PSThread
 
 ## SYNOPSIS
@@ -9,19 +16,19 @@ Enables the ability to leverage multithreading within powershell whilst reducing
 ### Runspace (Default)
 
 ```
-Invoke-PSThread -RunspaceDefinition <System.Management.Automation.ScriptBlock> [-ApartmentState <System.Threading.ApartmentState>] [-AssemblyList <System.Management.Automation.Runspaces.SessionStateAssemblyEntry[]>] [-Confirm <System.Management.Automation.SwitchParameter>] [-ContinueOnError <System.Management.Automation.SwitchParameter>] [-FunctionList <System.Management.Automation.FunctionInfo[]>] [-ModuleList <System.Management.Automation.PSModuleInfo[]>] [-Runspace <System.Management.Automation.SwitchParameter>] [-RunspaceParameters <System.Collections.Hashtable>] [-SynchronizedHashtable <System.Management.Automation.PSVariable>] [-ThreadOption <System.Management.Automation.Runspaces.PSThreadOptions>] [-VariableList <System.Management.Automation.PSVariable[]>] [-WaitForAvailableRunspace <System.Management.Automation.SwitchParameter>] [-WhatIf <System.Management.Automation.SwitchParameter>] [<CommonParameters>]
+Invoke-PSThread -RunspaceDefinition <System.Management.Automation.ScriptBlock> [-ApartmentState <System.Threading.ApartmentState>] [-AssemblyList <System.Management.Automation.Runspaces.SessionStateAssemblyEntry[]>] [-ContinueOnError <System.Management.Automation.SwitchParameter>] [-FunctionList <System.Management.Automation.FunctionInfo[]>] [-ModuleList <System.Management.Automation.PSModuleInfo[]>] [-Runspace <System.Management.Automation.SwitchParameter>] [-RunspaceParameters <System.Collections.Hashtable>] [-SynchronizedHashtable <System.Management.Automation.PSVariable>] [-ThreadOption <System.Management.Automation.Runspaces.PSThreadOptions>] [-VariableList <System.Management.Automation.PSVariable[]>] [-WaitForAvailableRunspace <System.Management.Automation.SwitchParameter>] [<CommonParameters>]
 ```
 
 ### RunspacePool
 
 ```
-Invoke-PSThread -InputObjectList <System.Object[]> -RunspaceDefinition <System.Management.Automation.ScriptBlock> [-ApartmentState <System.Threading.ApartmentState>] [-AssemblyList <System.Management.Automation.Runspaces.SessionStateAssemblyEntry[]>] [-Confirm <System.Management.Automation.SwitchParameter>] [-ContinueOnError <System.Management.Automation.SwitchParameter>] [-FunctionList <System.Management.Automation.FunctionInfo[]>] [-MaximumRunspaces <System.UInt32>] [-ModuleList <System.Management.Automation.PSModuleInfo[]>] [-RunspaceParameters <System.Collections.Hashtable>] [-RunspacePool <System.Management.Automation.SwitchParameter>] [-SynchronizedHashtable <System.Management.Automation.PSVariable>] [-ThreadOption <System.Management.Automation.Runspaces.PSThreadOptions>] [-VariableList <System.Management.Automation.PSVariable[]>] [-WaitForAvailableRunspace <System.Management.Automation.SwitchParameter>] [-WhatIf <System.Management.Automation.SwitchParameter>] [<CommonParameters>]
+Invoke-PSThread -InputObjectList <System.Object[]> -RunspaceDefinition <System.Management.Automation.ScriptBlock> [-ApartmentState <System.Threading.ApartmentState>] [-AssemblyList <System.Management.Automation.Runspaces.SessionStateAssemblyEntry[]>] [-ContinueOnError <System.Management.Automation.SwitchParameter>] [-FunctionList <System.Management.Automation.FunctionInfo[]>] [-MaximumRunspaces <System.UInt32>] [-ModuleList <System.Management.Automation.PSModuleInfo[]>] [-RunspaceParameters <System.Collections.Hashtable>] [-RunspacePool <System.Management.Automation.SwitchParameter>] [-SynchronizedHashtable <System.Management.Automation.PSVariable>] [-ThreadOption <System.Management.Automation.Runspaces.PSThreadOptions>] [-VariableList <System.Management.Automation.PSVariable[]>] [-WaitForAvailableRunspace <System.Management.Automation.SwitchParameter>] [<CommonParameters>]
 ```
 
 ### Await
 
 ```
-Invoke-PSThread -ThreadList <System.Management.Automation.PSObject[]> [-Await <System.Management.Automation.SwitchParameter>] [-Confirm <System.Management.Automation.SwitchParameter>] [-ContinueOnError <System.Management.Automation.SwitchParameter>] [-LoopDuration <System.TimeSpan>] [-LoopTimeout <System.TimeSpan>] [-WaitForAvailableRunspace <System.Management.Automation.SwitchParameter>] [-WhatIf <System.Management.Automation.SwitchParameter>] [<CommonParameters>]
+Invoke-PSThread -ThreadList <System.Management.Automation.PSObject[]> [-Await <System.Management.Automation.SwitchParameter>] [-ContinueOnError <System.Management.Automation.SwitchParameter>] [-LoopDuration <System.TimeSpan>] [-LoopTimeout <System.TimeSpan>] [-WaitForAvailableRunspace <System.Management.Automation.SwitchParameter>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,10 +39,10 @@ See the fully working examples below.
 
 ## EXAMPLES
 
-### Example 1
+### Example 1: EXAMPLE 1
 
 
-Create a runspace
+Create a runspace.
 
 ```
 [ScriptBlock]$RunspaceDefinition = {
@@ -155,7 +162,6 @@ Write-Output -InputObject ($InvokePSThreadResult)
 
 
 Create a runspace pool, submit all jobs to the pool, and the pool will manage their execution. The function will be executed a second time to wait until all jobs have been completed, return their output, and cleanup.
-
 
 ```
 [ScriptBlock]$RunspaceDefinition = {
@@ -279,24 +285,6 @@ Accepted values:
 Required: True (None) False (Await)
 Position: Named
 Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-DontShow: False
-```
-
-### -Confirm
-
-{{ Fill Confirm Description }}
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-Accepted values: 
-
-Required: True (None) False (All)
-Position: Named
-Default value: 
 Accept pipeline input: False
 Accept wildcard characters: False
 DontShow: False
@@ -596,24 +584,6 @@ Accept wildcard characters: False
 DontShow: False
 ```
 
-### -WhatIf
-
-{{ Fill WhatIf Description }}
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-Accepted values: 
-
-Required: True (None) False (All)
-Position: Named
-Default value: 
-Accept pipeline input: False
-Accept wildcard characters: False
-DontShow: False
-```
-
 
 ### CommonParameters
 
@@ -626,14 +596,14 @@ Any useful tidbits
 
 ## RELATED LINKS
 
-[] (https://davewyatt.wordpress.com/2014/04/29/more-potential-use-cases-for-thread-safe-variable-access-in-powershell-events/)
+(https://davewyatt.wordpress.com/2014/04/29/more-potential-use-cases-for-thread-safe-variable-access-in-powershell-events/)
 
-[] (https://davewyatt.wordpress.com/2014/04/29/more-potential-use-cases-for-thread-safe-variable-access-in-powershell-events/)
+(https://davewyatt.wordpress.com/2014/04/29/more-potential-use-cases-for-thread-safe-variable-access-in-powershell-events/)
 
-[] (https://www.codeproject.com/Tips/895840/Multi-Threaded-PowerShell-Cookbook)
+(https://www.codeproject.com/Tips/895840/Multi-Threaded-PowerShell-Cookbook)
 
-[] (https://www.linkedin.com/pulse/multithreading-powershell-scripts-alexey/)
+(https://www.linkedin.com/pulse/multithreading-powershell-scripts-alexey/)
 
-[] (https://xkln.net/blog/multithreading-in-powershell--running-a-specific-number-of-threads/)
+(https://xkln.net/blog/multithreading-in-powershell--running-a-specific-number-of-threads/)
 
-[] (https://markw.dev/#:~:text=There%20are%20two%20ways%20we,other%20is%20by%20using%20splatting.&text=The%20important%20part%20here%20is,plural)%20instead%20of%20AddParameter()%20.)
+(https://markw.dev/#:~:text=There%20are%20two%20ways%20we,other%20is%20by%20using%20splatting.&text=The%20important%20part%20here%20is,plural)%20instead%20of%20AddParameter()%20.)
