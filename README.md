@@ -1,10 +1,3 @@
----
-external help file: -help.xml
-Module Name: 
-online version: 
-schema: 2.0.0
----
-
 # Invoke-PSThread
 
 ## SYNOPSIS
@@ -16,19 +9,19 @@ Enables the ability to leverage multithreading within powershell whilst reducing
 ### Runspace (Default)
 
 ```
-Invoke-PSThread -RunspaceDefinition <ScriptBlock> [-ApartmentState <ApartmentState>] [-AssemblyList <SessionStateAssemblyEntry[]>] [-Confirm] [-ContinueOnError] [-FunctionList <FunctionInfo[]>] [-ModuleList <PSModuleInfo[]>] [-Runspace] [-RunspaceParameters <Hashtable>] [-SynchronizedHashtable <PSVariable>] [-ThreadOption <PSThreadOptions>] [-VariableList <PSVariable[]>] [-WaitForAvailableRunspace] [-WhatIf] [<CommonParameters>]
+Invoke-PSThread -RunspaceDefinition <System.Management.Automation.ScriptBlock> [-ApartmentState <System.Threading.ApartmentState>] [-AssemblyList <System.Management.Automation.Runspaces.SessionStateAssemblyEntry[]>] [-Confirm <System.Management.Automation.SwitchParameter>] [-ContinueOnError <System.Management.Automation.SwitchParameter>] [-FunctionList <System.Management.Automation.FunctionInfo[]>] [-ModuleList <System.Management.Automation.PSModuleInfo[]>] [-Runspace <System.Management.Automation.SwitchParameter>] [-RunspaceParameters <System.Collections.Hashtable>] [-SynchronizedHashtable <System.Management.Automation.PSVariable>] [-ThreadOption <System.Management.Automation.Runspaces.PSThreadOptions>] [-VariableList <System.Management.Automation.PSVariable[]>] [-WaitForAvailableRunspace <System.Management.Automation.SwitchParameter>] [-WhatIf <System.Management.Automation.SwitchParameter>] [<CommonParameters>]
 ```
 
 ### RunspacePool
 
 ```
-Invoke-PSThread -InputObjectList <Object[]> -RunspaceDefinition <ScriptBlock> [-ApartmentState <ApartmentState>] [-AssemblyList <SessionStateAssemblyEntry[]>] [-Confirm] [-ContinueOnError] [-FunctionList <FunctionInfo[]>] [-MaximumRunspaces <UInt32>] [-ModuleList <PSModuleInfo[]>] [-RunspaceParameters <Hashtable>] [-RunspacePool] [-SynchronizedHashtable <PSVariable>] [-ThreadOption <PSThreadOptions>] [-VariableList <PSVariable[]>] [-WaitForAvailableRunspace] [-WhatIf] [<CommonParameters>]
+Invoke-PSThread -InputObjectList <System.Object[]> -RunspaceDefinition <System.Management.Automation.ScriptBlock> [-ApartmentState <System.Threading.ApartmentState>] [-AssemblyList <System.Management.Automation.Runspaces.SessionStateAssemblyEntry[]>] [-Confirm <System.Management.Automation.SwitchParameter>] [-ContinueOnError <System.Management.Automation.SwitchParameter>] [-FunctionList <System.Management.Automation.FunctionInfo[]>] [-MaximumRunspaces <System.UInt32>] [-ModuleList <System.Management.Automation.PSModuleInfo[]>] [-RunspaceParameters <System.Collections.Hashtable>] [-RunspacePool <System.Management.Automation.SwitchParameter>] [-SynchronizedHashtable <System.Management.Automation.PSVariable>] [-ThreadOption <System.Management.Automation.Runspaces.PSThreadOptions>] [-VariableList <System.Management.Automation.PSVariable[]>] [-WaitForAvailableRunspace <System.Management.Automation.SwitchParameter>] [-WhatIf <System.Management.Automation.SwitchParameter>] [<CommonParameters>]
 ```
 
 ### Await
 
 ```
-Invoke-PSThread -ThreadList <PSObject[]> [-Await] [-Confirm] [-ContinueOnError] [-LoopDuration <TimeSpan>] [-LoopTimeout <TimeSpan>] [-WaitForAvailableRunspace] [-WhatIf] [<CommonParameters>]
+Invoke-PSThread -ThreadList <System.Management.Automation.PSObject[]> [-Await <System.Management.Automation.SwitchParameter>] [-Confirm <System.Management.Automation.SwitchParameter>] [-ContinueOnError <System.Management.Automation.SwitchParameter>] [-LoopDuration <System.TimeSpan>] [-LoopTimeout <System.TimeSpan>] [-WaitForAvailableRunspace <System.Management.Automation.SwitchParameter>] [-WhatIf <System.Management.Automation.SwitchParameter>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -241,7 +234,7 @@ Write-Output -InputObject ($ThreadAwaitResult)
 A valid apartment state that will be used to create each thread within the runspace.
 
 ```yaml
-Type: ApartmentState
+Type: System.Threading.ApartmentState
 Parameter Sets: RunspacePool, Runspace
 Aliases: AS
 Accepted values: 
@@ -259,7 +252,7 @@ DontShow: False
 A list of one or more additional assemblies that will be loaded into the inital session state, and made available to each thread.
 
 ```yaml
-Type: SessionStateAssemblyEntry[]
+Type: System.Management.Automation.Runspaces.SessionStateAssemblyEntry[]
 Parameter Sets: RunspacePool, Runspace
 Aliases: AL
 Accepted values: 
@@ -277,7 +270,7 @@ DontShow: False
 Strictly places this function into "Await" mode.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: Await
 Aliases: AW
 Accepted values: 
@@ -295,7 +288,7 @@ DontShow: False
 {{ Fill Confirm Description }}
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 Accepted values: 
@@ -313,7 +306,7 @@ DontShow: False
 Ignore errors.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: COE
 Accepted values: 
@@ -331,7 +324,7 @@ DontShow: False
 A list of one or more additional functions that will be loaded into the inital session state, and made available to each thread.
 
 ```yaml
-Type: FunctionInfo[]
+Type: System.Management.Automation.FunctionInfo[]
 Parameter Sets: RunspacePool, Runspace
 Aliases: FL
 Accepted values: 
@@ -350,7 +343,7 @@ A list of one or more objects to submit to the runspace pool.
 The runspace pool will create a job for each item and process them in a queue fashion (As new runspaces become available) until the list has been completed.
 
 ```yaml
-Type: Object[]
+Type: System.Object[]
 Parameter Sets: RunspacePool
 Aliases: IOL
 Accepted values: 
@@ -368,7 +361,7 @@ DontShow: False
 A valid timespan that will be used for designating how often to recheck the status of running threads.
 
 ```yaml
-Type: TimeSpan
+Type: System.TimeSpan
 Parameter Sets: Await
 Aliases: LD
 Accepted values: 
@@ -386,7 +379,7 @@ DontShow: False
 A valid timespan that will be used for designating the maximum time allowed to monitor running threads.
 
 ```yaml
-Type: TimeSpan
+Type: System.TimeSpan
 Parameter Sets: Await
 Aliases: LT
 Accepted values: 
@@ -405,7 +398,7 @@ The maximum runspaces available to the runspace pool.
 By default, the value will be set to double the amount of logical processors available to the current device.
 
 ```yaml
-Type: UInt32
+Type: System.UInt32
 Parameter Sets: RunspacePool
 Aliases: MR
 Accepted values: 
@@ -423,7 +416,7 @@ DontShow: False
 A list of one or more additional modules that will be loaded into the inital session state, and made available to each thread.
 
 ```yaml
-Type: PSModuleInfo[]
+Type: System.Management.Automation.PSModuleInfo[]
 Parameter Sets: RunspacePool, Runspace
 Aliases: ML
 Accepted values: 
@@ -441,7 +434,7 @@ DontShow: False
 Strictly places this function into "Runspace" mode.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: Runspace
 Aliases: RS
 Accepted values: 
@@ -459,7 +452,7 @@ DontShow: False
 A valid scriptblock that will be executed by either a single thread within the runspace, or by each thread within the runspace pool.
 
 ```yaml
-Type: ScriptBlock
+Type: System.Management.Automation.ScriptBlock
 Parameter Sets: RunspacePool, Runspace
 Aliases: RD
 Accepted values: 
@@ -478,7 +471,7 @@ A valid hashtable containing the key-value pairs for the additional parameters t
 If the order of the parameters needs to be preserved, use an ordered hashtable instead.
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: RunspacePool, Runspace
 Aliases: RSP
 Accepted values: 
@@ -496,7 +489,7 @@ DontShow: False
 Strictly places this function into "RunspacePool" mode.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: RunspacePool
 Aliases: RP
 Accepted values: 
@@ -515,7 +508,7 @@ A valid variable object that contains the synchronized hashtable.
 This is primarily used to share data between the main thread, and any additional threads that are created.
 
 ```yaml
-Type: PSVariable
+Type: System.Management.Automation.PSVariable
 Parameter Sets: RunspacePool, Runspace
 Aliases: SHT
 Accepted values: 
@@ -534,7 +527,7 @@ A list of one ore more objects that were returned in the output from a previous 
 The runspaces in this list will be monitored until they have completed.
 
 ```yaml
-Type: PSObject[]
+Type: System.Management.Automation.PSObject[]
 Parameter Sets: Await
 Aliases: TL
 Accepted values: 
@@ -552,7 +545,7 @@ DontShow: False
 A valid thread option that will be used to create each thread within the runspace.
 
 ```yaml
-Type: PSThreadOptions
+Type: System.Management.Automation.Runspaces.PSThreadOptions
 Parameter Sets: RunspacePool, Runspace
 Aliases: TO
 Accepted values: 
@@ -570,7 +563,7 @@ DontShow: False
 A list of one or more additional variables that will be loaded into the inital session state, and made available to each thread.
 
 ```yaml
-Type: PSVariable[]
+Type: System.Management.Automation.PSVariable[]
 Parameter Sets: RunspacePool, Runspace
 Aliases: VL
 Accepted values: 
@@ -589,7 +582,7 @@ If there are no more available runspaces, the function will wait to submit any a
 This will drastically increase the time it takes to process the runspace pool.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: WFAR
 Accepted values: 
@@ -607,7 +600,7 @@ DontShow: False
 {{ Fill WhatIf Description }}
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 Accepted values: 
