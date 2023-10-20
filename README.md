@@ -596,14 +596,12 @@ Any useful tidbits
 
 ## RELATED LINKS
 
-(https://davewyatt.wordpress.com/2014/04/29/more-potential-use-cases-for-thread-safe-variable-access-in-powershell-events/)
+https://davewyatt.wordpress.com/2014/04/29/more-potential-use-cases-for-thread-safe-variable-access-in-powershell-events/
 
-(https://davewyatt.wordpress.com/2014/04/29/more-potential-use-cases-for-thread-safe-variable-access-in-powershell-events/)
+https://www.codeproject.com/Tips/895840/Multi-Threaded-PowerShell-Cookbook
 
-(https://www.codeproject.com/Tips/895840/Multi-Threaded-PowerShell-Cookbook)
+https://www.linkedin.com/pulse/multithreading-powershell-scripts-alexey/
 
-(https://www.linkedin.com/pulse/multithreading-powershell-scripts-alexey/)
+https://xkln.net/blog/multithreading-in-powershell--running-a-specific-number-of-threads/
 
-(https://xkln.net/blog/multithreading-in-powershell--running-a-specific-number-of-threads/)
-
-(https://markw.dev/#:~:text=There%20are%20two%20ways%20we,other%20is%20by%20using%20splatting.&text=The%20important%20part%20here%20is,plural)%20instead%20of%20AddParameter()%20.)
+https://markw.dev/#:~:text=There%20are%20two%20ways%20we,other%20is%20by%20using%20splatting.&text=The%20important%20part%20here%20is,plural)%20instead%20of%20AddParameter()%20.
