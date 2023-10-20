@@ -377,7 +377,7 @@ DontShow: False
 ### -MaximumRunspaces
 
 The maximum runspaces available to the runspace pool.
-By default, the value will be set to double the amount of logical processors available to the current device.
+By default, the value will be set to the amount of logical processors available to the current device.
 
 ```yaml
 Type: System.UInt32
@@ -560,7 +560,7 @@ DontShow: False
 
 ### -WaitForAvailableRunspace
 
-If there are no more available runspaces, the function will wait to submit any additional jobs to teh runspace pool as runspaces become available.
+If there are no more available runspaces, the function will wait to submit any additional jobs to the runspace pool as runspaces become available.
 This will drastically increase the time it takes to process the runspace pool.
 
 ```yaml
