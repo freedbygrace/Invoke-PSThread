@@ -32,12 +32,12 @@ See the fully working examples below.
 
 ## EXAMPLES
 
-### Example 1: EXAMPLE 1
+### Example 1
 
-```
+
 Create a runspace
-```
 
+```
 [ScriptBlock]$RunspaceDefinition = {
                                         Param
                                           (
@@ -83,12 +83,12 @@ $InvokePSThreadParameters = New-Object -TypeName 'System.Collections.Specialized
 $InvokePSThreadResult = Invoke-PSThread @InvokePSThreadParameters
 
 Write-Output -InputObject ($InvokePSThreadResult)
+```
 
 
 
 
-
-### Example 2: EXAMPLE 2
+### Example 2
 
 
 Create a runspace pool, submit all jobs to the pool, and the pool will manage their execution.
@@ -151,7 +151,7 @@ Write-Output -InputObject ($InvokePSThreadResult)
 
 
 
-### Example 3: EXAMPLE 3
+### Example 3
 
 
 Create a runspace pool, submit all jobs to the pool, and the pool will manage their execution. The function will be executed a second time to wait until all jobs have been completed, return their output, and cleanup.
@@ -637,4 +637,3 @@ Any useful tidbits
 [] (https://xkln.net/blog/multithreading-in-powershell--running-a-specific-number-of-threads/)
 
 [] (https://markw.dev/#:~:text=There%20are%20two%20ways%20we,other%20is%20by%20using%20splatting.&text=The%20important%20part%20here%20is,plural)%20instead%20of%20AddParameter()%20.)
-
