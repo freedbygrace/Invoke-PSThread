@@ -32,7 +32,7 @@ See the fully working examples below.
 
 ## EXAMPLES
 
-### Example 1: EXAMPLE 1
+### Example 1
 
 
 Create a runspace.
