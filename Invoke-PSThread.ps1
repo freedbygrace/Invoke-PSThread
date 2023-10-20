@@ -50,10 +50,10 @@ Function Invoke-PSThread
           A valid thread option that will be used to create each thread within the runspace.
 
           .PARAMETER MaximumRunspaces
-          The maximum runspaces available to the runspace pool. By default, the value will be set to double the amount of logical processors available to the current device.
+          The maximum runspaces available to the runspace pool. By default, the value will be set to the amount of logical processors available to the current device.
 
           .PARAMETER WaitForAvailableRunspace
-          If there are no more available runspaces, the function will wait to submit any additional jobs to teh runspace pool as runspaces become available. This will drastically increase the time it takes to process the runspace pool.
+          If there are no more available runspaces, the function will wait to submit any additional jobs to the runspace pool as runspaces become available. This will drastically increase the time it takes to process the runspace pool.
 
           .PARAMETER ThreadList
           A list of one ore more objects that were returned in the output from a previous call of this function. The runspaces in this list will be monitored until they have completed. 
@@ -245,9 +245,6 @@ Function Invoke-PSThread
           https://davewyatt.wordpress.com/2014/04/29/more-potential-use-cases-for-thread-safe-variable-access-in-powershell-events/
 
           .LINK
-          https://davewyatt.wordpress.com/2014/04/29/more-potential-use-cases-for-thread-safe-variable-access-in-powershell-events/
-
-          .LINK
           https://www.codeproject.com/Tips/895840/Multi-Threaded-PowerShell-Cookbook
 
           .LINK
@@ -257,10 +254,10 @@ Function Invoke-PSThread
           https://xkln.net/blog/multithreading-in-powershell--running-a-specific-number-of-threads/
 
           .LINK
-          https://markw.dev/#:~:text=There%20are%20two%20ways%20we,other%20is%20by%20using%20splatting.&text=The%20important%20part%20here%20is,plural)%20instead%20of%20AddParameter()%20.
+          https://markw.dev/#:~:text=There%20are%20two%20ways%20we,other%20is%20by%20using%20splatting.&text=The%20important%20part%20here%20is,plural)%20instead%20of%20AddParameter()%20
         #>
         
-        [CmdletBinding(ConfirmImpact = 'Low', DefaultParameterSetName = 'Runspace', HelpURI = '', SupportsShouldProcess = $True, PositionalBinding = $True)]
+        [CmdletBinding(ConfirmImpact = 'Low', DefaultParameterSetName = 'Runspace', SupportsShouldProcess = $False)]
        
         Param
           (        
@@ -330,7 +327,7 @@ Function Invoke-PSThread
               [System.Management.Automation.Runspaces.PSThreadOptions]$ThreadOption,
 
               [Parameter(Mandatory=$False, ParameterSetName = 'RunspacePool')]
-              [ValidateScript({$_ -le (((Get-CIMInstance -Namespace 'Root\CIMv2' -ClassName 'Win32_Processor' -Property 'NumberOfLogicalProcessors' -Verbose:$False).NumberOfLogicalProcessors | Measure-Object -Sum).Sum * 2)})]
+              [ValidateScript({$_ -le (((Get-CIMInstance -Namespace 'Root\CIMv2' -ClassName 'Win32_Processor' -Property 'NumberOfLogicalProcessors' -Verbose:$False).NumberOfLogicalProcessors | Measure-Object -Sum).Sum)})]
               [Alias('MR')]
               [UInt32]$MaximumRunspaces,
 
@@ -473,7 +470,7 @@ Function Invoke-PSThread
 
                             {($Null -ieq $MaximumRunspaces) -or ($MaximumRunspaces -eq 0)}
                               {
-                                  $MaximumRunspaces = ((Get-CIMInstance -Namespace 'Root\CIMv2' -ClassName 'Win32_Processor' -Property 'NumberOfLogicalProcessors' -Verbose:$False).NumberOfLogicalProcessors | Measure-Object -Sum).Sum * 2
+                                  $MaximumRunspaces = ((Get-CIMInstance -Namespace 'Root\CIMv2' -ClassName 'Win32_Processor' -Property 'NumberOfLogicalProcessors' -Verbose:$False).NumberOfLogicalProcessors | Measure-Object -Sum).Sum
                               }
                         }
                 }
