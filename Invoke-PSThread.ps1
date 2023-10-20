@@ -1,4 +1,4 @@
-﻿## Microsoft Function Naming Convention: http://msdn.microsoft.com/en-us/library/ms714428(v=vs.85).aspx
+## Microsoft Function Naming Convention: http://msdn.microsoft.com/en-us/library/ms714428(v=vs.85).aspx
 
 #region Function Invoke-PSThread
 Function Invoke-PSThread
@@ -11,52 +11,61 @@ Function Invoke-PSThread
           This function aims to remove the enormous complexity out of multithreading within powershell. See the fully working examples below.
           
           .PARAMETER Runspace
-          Your parameter description
+          Strictly places this function into "Runspace" mode.
 
           .PARAMETER RunspacePool
-          Your parameter description
+          Strictly places this function into "RunspacePool" mode.
 
           .PARAMETER Await
-          Your parameter description
+          Strictly places this function into "Await" mode.
 
           .PARAMETER RunspaceDefinition
-          Your parameter description
+          A valid scriptblock that will be executed by either a single thread within the runspace, or by each thread within the runspace pool. 
 
           .PARAMETER RunspaceParameters
-          Your parameter description
+          A valid hashtable containing the key-value pairs for the additional parameters to be passed to each thread. If the order of the parameters needs to be preserved, use an ordered hashtable instead.
 
           .PARAMETER InputObjectList
-          Your parameter description
+          A list of one or more objects to submit to the runspace pool. The runspace pool will create a job for each item and process them in a queue fashion (As new runspaces become available) until the list has been completed.
 
           .PARAMETER SynchronizedHashtable
-          Your parameter description
+          A valid variable object that contains the synchronized hashtable. This is primarily used to share data between the main thread, and any additional threads that are created.
 
           .PARAMETER AssemblyList
-          Your parameter description
+          A list of one or more additional assemblies that will be loaded into the inital session state, and made available to each thread.
 
           .PARAMETER FunctionList
-          Your parameter description
+          A list of one or more additional functions that will be loaded into the inital session state, and made available to each thread.
 
           .PARAMETER ModuleList
-          Your parameter description
+          A list of one or more additional modules that will be loaded into the inital session state, and made available to each thread.
 
           .PARAMETER VariableList
-          Your parameter description
+          A list of one or more additional variables that will be loaded into the inital session state, and made available to each thread.
 
-          .PARAMETER ThreadList
-          Your parameter description
+          .PARAMETER ApartmentState
+          A valid apartment state that will be used to create each thread within the runspace.
 
-          .PARAMETER LoopTimeout
-          Your parameter description
+          .PARAMETER ThreadOption
+          A valid thread option that will be used to create each thread within the runspace.
 
-          .PARAMETER LoopDuration
-          Your parameter description
+          .PARAMETER MaximumRunspaces
+          The maximum runspaces available to the runspace pool. By default, the value will be set to double the amount of logical processors available to the current device.
 
           .PARAMETER WaitForAvailableRunspace
-          Your parameter description
+          If there are no more available runspaces, the function will wait to submit any additional jobs to teh runspace pool as runspaces become available. This will drastically increase the time it takes to process the runspace pool.
+
+          .PARAMETER ThreadList
+          A list of one ore more objects that were returned in the output from a previous call of this function. The runspaces in this list will be monitored until they have completed. 
+
+          .PARAMETER LoopTimeout
+          A valid timespan that will be used for designating the maximum time allowed to monitor running threads.
+
+          .PARAMETER LoopDuration
+          A valid timespan that will be used for designating how often to recheck the status of running threads.
 
           .PARAMETER ContinueOnError
-          Your parameter description
+          Ignore errors.
           
           .EXAMPLE
           Create a runspace
@@ -93,7 +102,7 @@ Function Invoke-PSThread
           $InvokePSThreadParameters = New-Object -TypeName 'System.Collections.Specialized.OrderedDictionary'
 	          $InvokePSThreadParameters.Runspace = $True
 	          $InvokePSThreadParameters.RunspaceDefinition = $RunspaceDefinition
-	          $InvokePSThreadParameters.RunspaceParameters = New-Object -TypeName 'System.Collections.Specialized.OrderedDictionary'
+	          $InvokePSThreadParameters.RunspaceParameters = [Ordered]@{}
               $InvokePSThreadParameters.RunspaceParameters.Title = "This is my UI title"
               $InvokePSThreadParameters.RunspaceParameters.Message = "This is my UI message.`r`nThis is the second line of my UI message.`r`nThis is the third line of my UI message."
             $InvokePSThreadParameters.SynchronizedHashtable = Get-Variable -Name 'SynchronizedHashtable' -ErrorAction SilentlyContinue
@@ -148,7 +157,7 @@ Function Invoke-PSThread
 	          $InvokePSThreadParameters.RunspacePool = $True
             $InvokePSThreadParameters.InputObjectList = 1..15
 	          $InvokePSThreadParameters.RunspaceDefinition = $RunspaceDefinition
-	          $InvokePSThreadParameters.RunspaceParameters = New-Object -TypeName 'System.Collections.Specialized.OrderedDictionary'
+	          $InvokePSThreadParameters.RunspaceParameters = [Ordered]@{}
               $InvokePSThreadParameters.RunspaceParameters.AdditionalParameter1 = Get-Random -Minimum 0 -Maximum 10000
               $InvokePSThreadParameters.RunspaceParameters.AdditionalParameter2 = Get-Random -Minimum 0 -Maximum 10000
             $InvokePSThreadParameters.SynchronizedHashtable = Get-Variable -Name 'SynchronizedHashtable' -ErrorAction SilentlyContinue
@@ -203,7 +212,7 @@ Function Invoke-PSThread
 	          $InvokePSThreadParameters.RunspacePool = $True
             $InvokePSThreadParameters.InputObjectList = Get-Process | Get-Random -Count 15
 	          $InvokePSThreadParameters.RunspaceDefinition = $RunspaceDefinition
-	          $InvokePSThreadParameters.RunspaceParameters = New-Object -TypeName 'System.Collections.Specialized.OrderedDictionary'
+	          $InvokePSThreadParameters.RunspaceParameters = [Ordered]@{}
               $InvokePSThreadParameters.RunspaceParameters.AdditionalParameter1 = Get-Random -Minimum 0 -Maximum 10000
               $InvokePSThreadParameters.RunspaceParameters.AdditionalParameter2 = Get-Random -Minimum 0 -Maximum 10000
             $InvokePSThreadParameters.SynchronizedHashtable = Get-Variable -Name 'SynchronizedHashtable' -ErrorAction SilentlyContinue
@@ -277,7 +286,7 @@ Function Invoke-PSThread
               [Parameter(Mandatory=$False, ParameterSetName = 'RunspacePool')]
               [ValidateNotNullOrEmpty()]
               [Alias('RSP')]
-              [System.Collections.Specialized.OrderedDictionary]$RunspaceParameters,
+              [System.Collections.HashTable]$RunspaceParameters,
 
               [Parameter(Mandatory=$True, ParameterSetName = 'RunspacePool')]
               [ValidateNotNullOrEmpty()]
@@ -310,6 +319,25 @@ Function Invoke-PSThread
               [Alias('VL')]
               [System.Management.Automation.PSVariable[]]$VariableList,
 
+              [Parameter(Mandatory=$False, ParameterSetName = 'Runspace')]
+              [Parameter(Mandatory=$False, ParameterSetName = 'RunspacePool')]
+              [Alias('AS')]
+              [System.Threading.ApartmentState]$ApartmentState,
+
+              [Parameter(Mandatory=$False, ParameterSetName = 'Runspace')]
+              [Parameter(Mandatory=$False, ParameterSetName = 'RunspacePool')]
+              [Alias('TO')]
+              [System.Management.Automation.Runspaces.PSThreadOptions]$ThreadOption,
+
+              [Parameter(Mandatory=$False, ParameterSetName = 'RunspacePool')]
+              [ValidateScript({$_ -le (((Get-CIMInstance -Namespace 'Root\CIMv2' -ClassName 'Win32_Processor' -Property 'NumberOfLogicalProcessors' -Verbose:$False).NumberOfLogicalProcessors | Measure-Object -Sum).Sum * 2)})]
+              [Alias('MR')]
+              [UInt32]$MaximumRunspaces,
+
+              [Parameter(Mandatory=$False)]
+              [Alias('WFAR')]
+              [Switch]$WaitForAvailableRunspace,
+
               [Parameter(Mandatory=$True, ParameterSetName = 'Await')]
               [ValidateNotNullOrEmpty()]
               [Alias('TL')]
@@ -317,18 +345,14 @@ Function Invoke-PSThread
 
               [Parameter(Mandatory=$False, ParameterSetName = 'Await')]
               [ValidateNotNullOrEmpty()]
-              [Alias('TO')]
+              [Alias('LT')]
               [System.TimeSpan]$LoopTimeout,
 
               [Parameter(Mandatory=$False, ParameterSetName = 'Await')]
               [ValidateNotNullOrEmpty()]
               [Alias('LD')]
               [System.TimeSpan]$LoopDuration,
-
-              [Parameter(Mandatory=$False)]
-              [Alias('WFAR')]
-              [Switch]$WaitForAvailableRunspace,
-                                            
+                               
               [Parameter(Mandatory=$False)]
               [Alias('COE')]
               [Switch]$ContinueOnError
@@ -433,6 +457,25 @@ Function Invoke-PSThread
 
                       $LoggingDetails.LogMessage = "$($GetCurrentDateTimeMessageFormat.Invoke()) - Parameter Set Name: $($ParameterSetName)" 
                       Write-Verbose -Message ($LoggingDetails.LogMessage)
+
+                    #Define default parameter values
+                      Switch ($True)
+                        {
+                            {($Null -ieq $ApartmentState)}
+                              {
+                                  [System.Threading.ApartmentState]$ApartmentState = [System.Threading.ApartmentState]::MTA
+                              }
+
+                            {($Null -ieq $ThreadOption)}
+                              {
+                                  [System.Management.Automation.Runspaces.PSThreadOptions]$ThreadOption = [System.Management.Automation.Runspaces.PSThreadOptions]::Default
+                              }
+
+                            {($Null -ieq $MaximumRunspaces) -or ($MaximumRunspaces -eq 0)}
+                              {
+                                  $MaximumRunspaces = ((Get-CIMInstance -Namespace 'Root\CIMv2' -ClassName 'Win32_Processor' -Property 'NumberOfLogicalProcessors' -Verbose:$False).NumberOfLogicalProcessors | Measure-Object -Sum).Sum * 2
+                              }
+                        }
                 }
               Catch
                 {
@@ -568,8 +611,8 @@ Function Invoke-PSThread
                             {                                
                                 $ConfigurationTable = New-Object -TypeName 'System.Collections.Specialized.OrderedDictionary'    
                                   $ConfigurationTable.Runspace = [System.Management.Automation.Runspaces.RunspaceFactory]::CreateRunspace($Host, $InitialSessionState)   
-                                  $ConfigurationTable.Runspace.ThreadOptions = [System.Management.Automation.Runspaces.PSThreadOptions]::ReuseThread
-                                  $ConfigurationTable.Runspace.ApartmentState = [System.Threading.ApartmentState]::MTA
+                                  $ConfigurationTable.Runspace.ThreadOptions = $ThreadOption
+                                  $ConfigurationTable.Runspace.ApartmentState = $ApartmentState
 
                                 $ConfigurationTable.Thread = [System.Management.Automation.PowerShell]::Create()
 
@@ -596,8 +639,8 @@ Function Invoke-PSThread
                                         {
                                             ForEach ($RunspaceParameter In $RunspaceParameters.GetEnumerator())
                                               {
-                                                  #$LoggingDetails.LogMessage = "$($GetCurrentDateTimeMessageFormat.Invoke()) - Attempting to add the value for parameter `"$($RunspaceParameter.Key)`" into the runspace. Please Wait..." 
-                                                  #Write-Verbose -Message ($LoggingDetails.LogMessage)
+                                                  $LoggingDetails.LogMessage = "$($GetCurrentDateTimeMessageFormat.Invoke()) - Attempting to add the value for parameter `"$($RunspaceParameter.Key)`" into the runspace. Please Wait..." 
+                                                  Write-Verbose -Message ($LoggingDetails.LogMessage)
 
                                                   $Null = $ConfigurationTable.Thread.AddParameter($RunspaceParameter.Key, $RunspaceParameter.Value)
                                               }
@@ -618,16 +661,12 @@ Function Invoke-PSThread
 
                           {($_ -iin @('RunspacePool'))}
                             {                                
-                                $ProcessorInfoPropertyName = 'NumberOfLogicalProcessors'
-                                
-                                $ProcessorInfo = Get-CIMInstance -Namespace 'Root\CIMv2' -ClassName 'Win32_Processor' -Property ($ProcessorInfoPropertyName) -Verbose:$False
-
                                 $ConfigurationTable = New-Object -TypeName 'System.Collections.Specialized.OrderedDictionary'
                                   $ConfigurationTable.MinimumRunspaces = 1
-                                  $ConfigurationTable.MaximumRunspaces = ($ProcessorInfo | Measure-Object -Property ($ProcessorInfoPropertyName) -Sum).Sum
+                                  $ConfigurationTable.MaximumRunspaces = $MaximumRunspaces
                                   $ConfigurationTable.RunspacePool = [System.Management.Automation.Runspaces.RunspaceFactory]::CreateRunspacePool($ConfigurationTable.MinimumRunspaces, $ConfigurationTable.MaximumRunspaces, $InitialSessionState, $Host)
-                                    $ConfigurationTable.RunspacePool.ThreadOptions = [System.Management.Automation.Runspaces.PSThreadOptions]::ReuseThread
-                                    $ConfigurationTable.RunspacePool.ApartmentState = [System.Threading.ApartmentState]::MTA
+                                    $ConfigurationTable.RunspacePool.ThreadOptions = $ThreadOption
+                                    $ConfigurationTable.RunspacePool.ApartmentState = $ApartmentState
 
                                 $Null = $ConfigurationTable.RunspacePool.Open()
  
@@ -714,7 +753,8 @@ Function Invoke-PSThread
 
                                                               Default
                                                                 {
-                                                                    ###Invalid/Null input object list item. Skip.
+                                                                    $LoggingDetails.WarningMessage = "$($GetCurrentDateTimeMessageFormat.Invoke()) - An invalid input object item was detected. Skipping..." 
+                                                                    Write-Warning -Message ($LoggingDetails.WarningMessage)
                                                                 }
                                                           }  
                                                     }
