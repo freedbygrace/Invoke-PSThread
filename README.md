@@ -90,10 +90,10 @@ Write-Output -InputObject ($InvokePSThreadResult)
 
 ### Example 2: EXAMPLE 2
 
-```
-Create a runspace pool, submit all jobs to the pool, and the pool will manage their execution.
-```
 
+Create a runspace pool, submit all jobs to the pool, and the pool will manage their execution.
+
+```
 [ScriptBlock]$RunspaceDefinition = {
                                       Param
                                         (
@@ -146,17 +146,18 @@ $InvokePSThreadParameters = New-Object -TypeName 'System.Collections.Specialized
 $InvokePSThreadResult = Invoke-PSThread @InvokePSThreadParameters
 
 Write-Output -InputObject ($InvokePSThreadResult)
-
+```
 
 
 
 
 ### Example 3: EXAMPLE 3
 
-```
-Create a runspace pool, submit all jobs to the pool, and the pool will manage their execution. The function will be executed a second time to wait until all jobs have been completed, return their output, and cleanup.
-```
 
+Create a runspace pool, submit all jobs to the pool, and the pool will manage their execution. The function will be executed a second time to wait until all jobs have been completed, return their output, and cleanup.
+
+
+```
 [ScriptBlock]$RunspaceDefinition = {
                                       Param
                                         (
@@ -221,7 +222,7 @@ $InvokePSThreadParameters = New-Object -TypeName 'System.Collections.Specialized
 $ThreadAwaitResult = Invoke-PSThread @InvokePSThreadParameters
 
 Write-Output -InputObject ($ThreadAwaitResult)
-
+```
 
 
 
