@@ -377,7 +377,7 @@ DontShow: False
 ### -MaximumRunspaces
 
 The maximum runspaces available to the runspace pool.
-By default, the value will be set to the amount of logical processors available to the current device.
+By default, the value will be set to double the amount of logical processors available to the current device.
 
 ```yaml
 Type: System.UInt32
@@ -560,7 +560,7 @@ DontShow: False
 
 ### -WaitForAvailableRunspace
 
-If there are no more available runspaces, the function will wait to submit any additional jobs to the runspace pool as runspaces become available.
+If there are no more available runspaces, the function will wait to submit any additional jobs to teh runspace pool as runspaces become available.
 This will drastically increase the time it takes to process the runspace pool.
 
 ```yaml
@@ -598,3 +598,98 @@ https://www.linkedin.com/pulse/multithreading-powershell-scripts-alexey/
 https://xkln.net/blog/multithreading-in-powershell--running-a-specific-number-of-threads/
 
 https://markw.dev/#:~:text=There%20are%20two%20ways%20we,other%20is%20by%20using%20splatting.&text=The%20important%20part%20here%20is,plural)%20instead%20of%20AddParameter()%20
+
+## SAMPLE LOG OUTPUT
+```
+VERBOSE: 10/22/2023 22:30:45.407 - Function 'Invoke-PSThread' is beginning. Please Wait...
+VERBOSE: 10/22/2023 22:30:45.42 - Available Function Parameter(s) = -Runspace:SwitchParameter, -RunspacePool:SwitchParameter, -Await:SwitchParameter, -RunspaceDefinition:ScriptBlock, -RunspaceParameters:Hashtable, -InputObjectList:Object[], -SynchronizedHashtable:PSVariable, -AssemblyList:SessionStateAssemblyEntry[], -FunctionList:FunctionInfo[], -ModuleList:PSModuleInfo[], -VariableList:PSVariable[], -ApartmentState:ApartmentState, -ThreadOption:PSThreadOptions, -MaximumRunspaces:UInt32, -WaitForAvailableRunspace:SwitchParameter, -ThreadList:PSObject[], -LoopTimeout:TimeSpan, -LoopDuration:TimeSpan, -ContinueOnError:SwitchParameter
+VERBOSE: 10/22/2023 22:30:45.435 - Supplied Function Parameter(s) = -RunspacePool:SwitchParameter, -InputObjectList:Object[], -RunspaceDefinition:ScriptBlock, -RunspaceParameters:Hashtable, -SynchronizedHashtable:PSVariable, Uknown:Unknown, Uknown:Unknown, Uknown:Unknown, -ContinueOnError:SwitchParameter, -Verbose:SwitchParameter
+VERBOSE: 10/22/2023 22:30:45.452 - Execution of Invoke-PSThread began on Sunday, October 22, 2023 @ 10:30:45.406 PM
+VERBOSE: 10/22/2023 22:30:45.457 - Parameter Set Name: RunspacePool
+VERBOSE: 10/22/2023 22:30:45.532 - Attempting to open a new runspace pool. Please Wait... [Minimum Runspaces: 1] [Maximum Runspaces: 12]
+VERBOSE: 10/22/2023 22:30:45.538 - Attempting to create a new runspace for input object list item 1 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: 10/22/2023 22:30:45.574 - Attempting to create a new runspace for input object list item 2 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: Attempting to begin thread ID "39468". Please Wait...
+VERBOSE: Attempting to begin thread ID "39208". Please Wait...
+VERBOSE: 10/22/2023 22:30:45.592 - Attempting to create a new runspace for input object list item 3 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: Attempting to begin thread ID "21168". Please Wait...
+VERBOSE: 10/22/2023 22:30:45.614 - Attempting to create a new runspace for input object list item 4 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: Attempting to begin thread ID "23484". Please Wait...
+VERBOSE: 10/22/2023 22:30:45.627 - Attempting to create a new runspace for input object list item 5 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: Attempting to begin thread ID "4192". Please Wait...
+VERBOSE: 10/22/2023 22:30:45.647 - Attempting to create a new runspace for input object list item 6 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: Attempting to begin thread ID "15304". Please Wait...
+VERBOSE: 10/22/2023 22:30:45.667 - Attempting to create a new runspace for input object list item 7 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: Attempting to begin thread ID "34308". Please Wait...
+VERBOSE: 10/22/2023 22:30:45.7 - Attempting to create a new runspace for input object list item 8 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: Attempting to begin thread ID "38792". Please Wait...
+VERBOSE: 10/22/2023 22:30:45.723 - Attempting to create a new runspace for input object list item 9 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: Attempting to begin thread ID "3636". Please Wait...
+VERBOSE: 10/22/2023 22:30:45.747 - Attempting to create a new runspace for input object list item 10 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: Attempting to begin thread ID "30676". Please Wait...
+VERBOSE: 10/22/2023 22:30:45.766 - Attempting to create a new runspace for input object list item 11 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: Attempting to begin thread ID "24804". Please Wait...
+VERBOSE: 10/22/2023 22:30:45.794 - Attempting to create a new runspace for input object list item 12 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: Attempting to begin thread ID "24660". Please Wait...
+VERBOSE: 10/22/2023 22:30:45.816 - Attempting to create a new runspace for input object list item 13 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: 10/22/2023 22:30:45.825 - Attempting to create a new runspace for input object list item 14 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: 10/22/2023 22:30:45.827 - Attempting to create a new runspace for input object list item 15 of 15. Please Wait... [InputObjectType: Process]
+VERBOSE: 10/22/2023 22:30:45.83 - Execution of Invoke-PSThread ended on Sunday, October 22, 2023 @ 10:30:45.83 PM
+VERBOSE: 10/22/2023 22:30:45.832 - Function execution took 0 hour(s), 0 minute(s), 0 second(s), and 423 millisecond(s)
+VERBOSE: 10/22/2023 22:30:45.833 - Function 'Invoke-PSThread' is completed.
+VERBOSE: 10/22/2023 22:30:45.845 - Function 'Invoke-PSThread' is beginning. Please Wait...
+VERBOSE: 10/22/2023 22:30:45.854 - Available Function Parameter(s) = -Runspace:SwitchParameter, -RunspacePool:SwitchParameter, -Await:SwitchParameter, -RunspaceDefinition:ScriptBlock, -RunspaceParameters:Hashtable, -InputObjectList:Object[], -SynchronizedHashtable:PSVariable, -AssemblyList:SessionStateAssemblyEntry[], -FunctionList:FunctionInfo[], -ModuleList:PSModuleInfo[], -VariableList:PSVariable[], -ApartmentState:ApartmentState, -ThreadOption:PSThreadOptions, -MaximumRunspaces:UInt32, -WaitForAvailableRunspace:SwitchParameter, -ThreadList:PSObject[], -LoopTimeout:TimeSpan, -LoopDuration:TimeSpan, -ContinueOnError:SwitchParameter
+VERBOSE: 10/22/2023 22:30:45.858 - Supplied Function Parameter(s) = -Await:SwitchParameter, -ThreadList:PSObject[], -LoopTimeout:TimeSpan, -LoopDuration:TimeSpan, -ContinueOnError:SwitchParameter, -Verbose:SwitchParameter
+VERBOSE: 10/22/2023 22:30:45.859 - Execution of Invoke-PSThread began on Sunday, October 22, 2023 @ 10:30:45.84 PM
+VERBOSE: 10/22/2023 22:30:45.861 - Parameter Set Name: Await
+VERBOSE: 10/22/2023 22:30:45.898 - Loop Timeout: 0 day(s), 1 hour(s), 0 minute(s), 0 second(s), and 0 millisecond(s)
+VERBOSE: 10/22/2023 22:30:45.9 - Current Time: Sunday, October 22, 2023 @ 10:30:45.9 PM
+VERBOSE: 10/22/2023 22:30:45.902 - Loop Timeout Time: Sunday, October 22, 2023 @ 11:30:45.9 PM
+VERBOSE: 10/22/2023 22:30:45.904 - Elasped Time: 0 day(s), 0 hour(s), 0 minute(s), 0 second(s), and 0 millisecond(s)
+VERBOSE: 10/22/2023 22:30:45.922 - Total Threads: 15
+VERBOSE: 10/22/2023 22:30:45.923 - Completed Threads: 0
+VERBOSE: 10/22/2023 22:30:45.925 - Incomplete Threads: 15
+VERBOSE: 10/22/2023 22:30:45.927 - Thread Completion Percentage: 0%
+VERBOSE: 10/22/2023 22:30:45.929 - Thread Incompletion Percentage: 100%
+VERBOSE: 10/22/2023 22:30:45.931 - Checking again in: 0 day(s), 0 hour(s), 0 minute(s), 15 second(s), and 0 millisecond(s)
+VERBOSE: Attempting to begin thread ID "34308". Please Wait...
+VERBOSE: Attempting to begin thread ID "3636". Please Wait...
+VERBOSE: Attempting to begin thread ID "24660". Please Wait...
+VERBOSE: 10/22/2023 22:31:00.945 - Elasped Time: 0 day(s), 0 hour(s), 0 minute(s), 15 second(s), and 41 millisecond(s)
+VERBOSE: 10/22/2023 22:31:00.947 - Total Threads: 15
+VERBOSE: 10/22/2023 22:31:00.948 - Completed Threads: 6
+VERBOSE: 10/22/2023 22:31:00.948 - Incomplete Threads: 9
+VERBOSE: 10/22/2023 22:31:00.949 - Thread Completion Percentage: 40%
+VERBOSE: 10/22/2023 22:31:00.95 - Thread Incompletion Percentage: 60%
+VERBOSE: 10/22/2023 22:31:00.951 - Checking again in: 0 day(s), 0 hour(s), 0 minute(s), 15 second(s), and 0 millisecond(s)
+VERBOSE: 10/22/2023 22:31:15.958 - Elasped Time: 0 day(s), 0 hour(s), 0 minute(s), 30 second(s), and 54 millisecond(s)
+VERBOSE: 10/22/2023 22:31:15.959 - All 15 background thread(s) have been completed. Terminating loop. Please Wait...
+VERBOSE: 10/22/2023 22:31:15.969 - Execution of Invoke-PSThread ended on Sunday, October 22, 2023 @ 10:31:15.969 PM
+VERBOSE: 10/22/2023 22:31:15.974 - Function execution took 0 hour(s), 0 minute(s), 30 second(s), and 128 millisecond(s)
+VERBOSE: 10/22/2023 22:31:15.975 - Function 'Invoke-PSThread' is completed.
+```
+
+## SAMPLE OUTPUT:
+
+```
+TotalThreads               : 15
+CompletedThreadList        : {@{Number=1; Thread=System.Management.Automation.PowerShell; 
+                             Input=System.Management.Automation.PSDataCollection`1[System.Management.Automation.PSObject]; 
+                             Output=System.Management.Automation.PSDataCollection`1[System.Management.Automation.PSObject]; 
+                             Status=System.Management.Automation.PowerShellAsyncResult}, @{Number=2; Thread=System.Management.Automation.PowerShell; 
+                             Input=System.Management.Automation.PSDataCollection`1[System.Management.Automation.PSObject]; 
+                             Output=System.Management.Automation.PSDataCollection`1[System.Management.Automation.PSObject]; 
+                             Status=System.Management.Automation.PowerShellAsyncResult}, @{Number=3; Thread=System.Management.Automation.PowerShell; 
+                             Input=System.Management.Automation.PSDataCollection`1[System.Management.Automation.PSObject]; 
+                             Output=System.Management.Automation.PSDataCollection`1[System.Management.Automation.PSObject]; 
+                             Status=System.Management.Automation.PowerShellAsyncResult}, @{Number=4; Thread=System.Management.Automation.PowerShell; 
+                             Input=System.Management.Automation.PSDataCollection`1[System.Management.Automation.PSObject]; 
+                             Output=System.Management.Automation.PSDataCollection`1[System.Management.Automation.PSObject]; 
+                             Status=System.Management.Automation.PowerShellAsyncResult}...}
+CompletedThreadListCount   : 15
+CompletedThreadPercentage  : 100
+IncompleteThreadList       : {}
+IncompleteThreadListCount  : 0
+IncompleteThreadPercentage : 0
+TimeElasped                : 00:00:30.0566619
+```
