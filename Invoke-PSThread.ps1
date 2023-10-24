@@ -73,48 +73,137 @@ Function Invoke-PSThread
           [ScriptBlock]$RunspaceDefinition = {
                                                   Param
                                                     (
-                                                        $SynchronizedHashtable,
-                                                        $Title,
-                                                        $Message
+                                                        $SynchronizedHashtable
                                                     )
-                                    
-                                                  $Null = Add-Type -AssemblyName 'System.Windows.Forms'
-                                                  $Null = Add-Type -AssemblyName 'System.Drawing'
+ 
+                                                  [System.Threading.Thread]::CurrentThread.Priority = [System.Threading.ThreadPriority]::Lowest
+                                                                                                            
+                                                  $SynchronizedHashtable.UIDefinitionContent = @'
+<Window
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        WindowStartupLocation="CenterScreen"
+                        Title="Example XAML Window"
+                        ShowInTaskbar="True"
+                        Topmost="True"
+                        SizeToContent="WidthAndHeight"
+                        Background="DeepSkyBlue"
+                        ResizeMode="NoResize"
+                        MaxWidth="720"
+                        Width="600">
 
-                                                  $Form = New-Object -TypeName 'System.Windows.Forms.Form'
-                                                    $Form.Size = New-Object -TypeName 'System.Drawing.Size' -ArgumentList @(300,150)
-                                                  
-                                                  $TextBox = New-Object -TypeName 'System.Windows.Forms.RichTextBox'
-                                                    $TextBox.Location = New-Object -TypeName 'System.Drawing.Point' -ArgumentList @(110,50)
-                                                    $TextBox.BorderStyle = 0
-                                                    $TextBox.BackColor = $Form.BackColor
+    <Border Padding="10">
+        <StackPanel>
+                <GroupBox Name="GROUPBOX_001" Header="Example Group Box" Margin="2,5,2,5" BorderBrush="Black" BorderThickness="1.4" FontWeight="DemiBold" FontSize="16" Background="Aqua">
+                    <Grid Margin="0,10,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                                                  $TextBox.Text = $Message
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-                                                  $Null = $Form.Controls.Add($TextBox)
+                        <Label Name="LBL_TXTBOX_001" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" Content="Example Label" FontSize="13" ToolTip="Example Tooltip"></Label>
+                        <TextBox Name="TXTBOX_001" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" FontSize="16" IsReadOnly="False" Height="25" BorderBrush="Black" BorderThickness="0.8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="4,4,4,4"></TextBox>
 
-                                                  $Null = $Form.ShowDialog() 
-                                             }
+                    </Grid>
+                </GroupBox>
+
+            <Grid Margin="0,10,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Button Name="BTN_OK" IsDefault="True" Grid.Column="1" Grid.ColumnSpan="1" MinWidth="90" Content="OK" HorizontalAlignment="Center" FontSize="17" Margin="5,0,5,0" Foreground="#000000" FontWeight="SemiBold" Background="#E1E1E1" BorderThickness="1.5"></Button>
+
+                <Button Name="BTN_Cancel" IsCancel="True" Grid.Column="2" Grid.ColumnSpan="1" MinWidth="90" Content="Cancel" HorizontalAlignment="Center" FontSize="17" Margin="5,0,5,0" Foreground="#000000" FontWeight="SemiBold" IsDefault="True" Background="#E1E1E1" BorderThickness="1.5"></Button>
+
+            </Grid>
+
+        </StackPanel>
+
+    </Border>
+
+</Window>
+'@
+                                                                                                            
+                                                                                                            $SynchronizedHashtable.UIDefinitionStringReader = New-Object -TypeName 'System.IO.StringReader' -ArgumentList @($SynchronizedHashtable.UIDefinitionContent)
+                                                                                                            
+                                                                                                            $SynchronizedHashtable.UIDefinitionXMLReader = [System.Xml.XmlReader]::Create($SynchronizedHashtable.UIDefinitionStringReader)   
+                                                                                                            
+                                                                                                            $SynchronizedHashtable.UIDefinitionXMLDocument = New-Object -TypeName 'System.XML.XMLDocument'
+                                                                                                              $SynchronizedHashtable.UIDefinitionXMLDocument.LoadXML(($SynchronizedHashtable.UIDefinitionContent -replace 'mc:Ignorable="d"','' -replace "x:N",'N' -replace '^<Win.*', '<Window' -replace 'x:Class="\S+"',''))
+                                                                                                            
+                                                                                                            $SynchronizedHashtable.UIWindow = [System.Windows.Markup.XAMLReader]::Load($SynchronizedHashtable.UIDefinitionXMLReader)
+                                                                                                            
+                                                                                                            $SynchronizedHashtable.UIControls = [Ordered]@{}
+                                                                                                            
+                                                                                                            $SynchronizedHashtable.UIDefinitionXMLDocument.SelectNodes("//*[@Name]") | ForEach-Object {$SynchronizedHashtable.UIControls.$($_.Name) = $SynchronizedHashtable.UIWindow.FindName($_.Name)}
+                                                                                                             
+                                                                                                            $SynchronizedHashtable.UIControls.BTN_OK.Add_Click({$Null = $SynchronizedHashtable.UIWindow.Close()})
+                                                                                                            
+                                                                                                            $Null = $SynchronizedHashtable.UIWindow.ShowDialog()
+                                                                                                       }
 
           $SynchronizedHashtable = [System.Collections.Hashtable]::Synchronized(@{})
-            $SynchronizedHashtable.ThreadIDList = New-Object -TypeName 'System.Collections.Generic.List[System.String]'
 
           $InvokePSThreadParameters = New-Object -TypeName 'System.Collections.Specialized.OrderedDictionary'
 	          $InvokePSThreadParameters.Runspace = $True
+            $InvokePSThreadParameters.ApartmentState = [System.Threading.ApartmentState]::STA
 	          $InvokePSThreadParameters.RunspaceDefinition = $RunspaceDefinition
-	          $InvokePSThreadParameters.RunspaceParameters = [Ordered]@{}
-              $InvokePSThreadParameters.RunspaceParameters.Title = "This is my UI title"
-              $InvokePSThreadParameters.RunspaceParameters.Message = "This is my UI message.`r`nThis is the second line of my UI message.`r`nThis is the third line of my UI message."
             $InvokePSThreadParameters.SynchronizedHashtable = Get-Variable -Name 'SynchronizedHashtable' -ErrorAction SilentlyContinue
-	          $InvokePSThreadParameters.FunctionList = Get-ChildItem -Path 'Function:' | Where-Object {($_.Name -iin @('Test'))}
+	          $InvokePSThreadParameters.AssemblyList = New-Object -TypeName 'System.Collections.Generic.List[System.Management.Automation.Runspaces.SessionStateAssemblyEntry]'
+              $InvokePSThreadParameters.AssemblyList.Add('PresentationFramework')
+              $InvokePSThreadParameters.AssemblyList.Add('System.Drawing')
+              $InvokePSThreadParameters.AssemblyList.Add('System.Windows.Forms')
+              $InvokePSThreadParameters.AssemblyList.Add('WindowsFormsIntegration')
+            $InvokePSThreadParameters.FunctionList = Get-ChildItem -Path 'Function:' | Where-Object {($_.Name -iin @('Test'))}
 	          $InvokePSThreadParameters.ModuleList = Get-Module | Where-Object {($_.Name -iin @('Test'))}
 	          $InvokePSThreadParameters.VariableList = Get-Variable | Where-Object {($_.Name -iin @('Test'))}
 	          $InvokePSThreadParameters.ContinueOnError = $False
 	          $InvokePSThreadParameters.Verbose = $True
 
           $InvokePSThreadResult = Invoke-PSThread @InvokePSThreadParameters
+                                                                    
+          $TextBoxControlName = 'TXTBOX_001'
+                                                                    
+          $TextBoxUpdateInterval = [System.TimeSpan]::FromSeconds(5)
+                                                                    
+          $TextBoxUpdateList = New-Object -TypeName 'System.Collections.Generic.List[System.String]'
+            $TextBoxUpdateList.Add('This is too legit!')
+            $TextBoxUpdateList.Add('This is too legit to quit!')
 
-          Write-Output -InputObject ($InvokePSThreadResult)
+          ForEach ($TextBoxUpdate In $TextBoxUpdateList)
+            {
+                $LogMessage = "Waiting for $($TextBoxUpdateInterval.TotalSeconds) second(s). Please Wait..."
+                Write-Verbose -Message ($LogMessage) -Verbose
+                                                                          
+                $Null = Start-Sleep -Milliseconds ($TextBoxUpdateInterval.TotalMilliseconds)
+                                                                          
+                $LogMessage = "Attempting to update text box. Please Wait..."
+                Write-Verbose -Message ($LogMessage) -Verbose
+                                                                          
+                $SynchronizedHashtable.UIWindow.Dispatcher.Invoke([Action]{$SynchronizedHashtable.UIControls.$($TextBoxControlName).Text = $TextBoxUpdate}, 'Normal')
+            }
+                                                                    
+          $InvokePSThreadParameters = New-Object -TypeName 'System.Collections.Specialized.OrderedDictionary'
+	          $InvokePSThreadParameters.Await = $True
+	          $InvokePSThreadParameters.ThreadList = $InvokePSThreadResult
+	          $InvokePSThreadParameters.LoopTimeout = [System.TimeSpan]::FromHours(1)
+	          $InvokePSThreadParameters.LoopDuration = [System.TimeSpan]::FromMilliseconds(15000)
+	          $InvokePSThreadParameters.ContinueOnError = $False
+	          $InvokePSThreadParameters.Verbose = $True
+
+          $ThreadAwaitResult = Invoke-PSThread @InvokePSThreadParameters
 
           .EXAMPLE
           Create a runspace pool, submit all jobs to the pool, and the pool will manage their execution.
@@ -257,19 +346,19 @@ Function Invoke-PSThread
           https://markw.dev/#:~:text=There%20are%20two%20ways%20we,other%20is%20by%20using%20splatting.&text=The%20important%20part%20here%20is,plural)%20instead%20of%20AddParameter()%20
         #>
         
-        [CmdletBinding(ConfirmImpact = 'Low', DefaultParameterSetName = 'Runspace', SupportsShouldProcess = $False)]
+        [CmdletBinding(ConfirmImpact = 'Low', DefaultParameterSetName = 'Runspace', PositionalBinding = $True)]
        
         Param
           (        
-              [Parameter(Mandatory=$False, ParameterSetName = 'Runspace')]
+              [Parameter(Position = 0, Mandatory=$False, ParameterSetName = 'Runspace')]
               [Alias('RS')]
               [Switch]$Runspace,
 
-              [Parameter(Mandatory=$False, ParameterSetName = 'RunspacePool')]
+              [Parameter(Position = 0, Mandatory=$False, ParameterSetName = 'RunspacePool')]
               [Alias('RP')]
               [Switch]$RunspacePool,
 
-              [Parameter(Mandatory=$False, ParameterSetName = 'Await')]
+              [Parameter(Position = 0, Mandatory=$False, ParameterSetName = 'Await')]
               [Alias('AW')]
               [Switch]$Await,
 
