@@ -71,10 +71,20 @@ Create a runspace.
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
                         <Label Name="LBL_TXTBOX_001" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" Content="Example Label" FontSize="13" ToolTip="Example Tooltip"></Label>
                         <TextBox Name="TXTBOX_001" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" FontSize="16" IsReadOnly="False" Height="25" BorderBrush="Black" BorderThickness="0.8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="4,4,4,4"></TextBox>
+						
+						<Label Name="LBL_TXTBOX_002" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="1" Content="UserName" FontSize="13" ToolTip="Example Tooltip"></Label>
+						<TextBox Name="TXTBOX_002" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3" FontSize="16" IsReadOnly="True" Height="25" BorderBrush="Black" BorderThickness="0.8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="4,4,4,4"></TextBox>
+
+						<Label Name="LBL_TXTBOX_003" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="1" Content="Password" FontSize="13" ToolTip="Example Tooltip"></Label>
+						<TextBox Name="TXTBOX_003" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="3" FontSize="16" IsReadOnly="True" Height="25" BorderBrush="Black" BorderThickness="0.8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="4,4,4,4"></TextBox>
 
                     </Grid>
                 </GroupBox>
@@ -119,7 +129,7 @@ Create a runspace.
                                                                                                              
                                                                                                             $SynchronizedHashtable.UIControls.BTN_OK.Add_Click({$Null = $SynchronizedHashtable.UIWindow.Close()})
                                                                                                             
-                                                                                                            $Null = $SynchronizedHashtable.UIWindow.ShowDialog()
+                                                                                                            $Null = $SynchronizedHashtable.UIWindow.Dispatcher.InvokeAsync{($SynchronizedHashtable.UIWindowResult = $SynchronizedHashtable.UIWindow.ShowDialog())}.Wait()
                                                                                                        }
 
           $SynchronizedHashtable = [System.Collections.Hashtable]::Synchronized(@{})
@@ -146,22 +156,25 @@ Create a runspace.
                                                                     
           $TextBoxUpdateInterval = [System.TimeSpan]::FromSeconds(5)
                                                                     
-          $TextBoxUpdateList = New-Object -TypeName 'System.Collections.Generic.List[System.String]'
-            $TextBoxUpdateList.Add('This is too legit!')
-            $TextBoxUpdateList.Add('This is too legit to quit!')
+                                                                    $UIControlUpdateDictionary = New-Object -TypeName 'System.Collections.Specialized.OrderedDictionary'
+                                                                      $UIControlUpdateDictionary.'TXTBOX_001' = "Value1"
+                                                                      $UIControlUpdateDictionary.'TXTBOX_002' = "Value2"
+                                                                      $UIControlUpdateDictionary.'TXTBOX_003' = "Value3"
 
-          ForEach ($TextBoxUpdate In $TextBoxUpdateList)
-            {
-                $LogMessage = "Waiting for $($TextBoxUpdateInterval.TotalSeconds) second(s). Please Wait..."
-                Write-Verbose -Message ($LogMessage) -Verbose
+                                                                      $LogMessage = "Pausing script execution for $($TextBoxUpdateInterval.TotalSeconds) second(s). Please Wait..."
+                                                                      Write-Verbose -Message ($LogMessage) -Verbose
                                                                           
-                $Null = Start-Sleep -Milliseconds ($TextBoxUpdateInterval.TotalMilliseconds)
+                                                                      $Null = Start-Sleep -Milliseconds ($TextBoxUpdateInterval.TotalMilliseconds)
+                                                                    
+                                                                    ForEach ($UIControlUpdate In $UIControlUpdateDictionary.GetEnumerator())
+                                                                      {                                                                          
+																		  $Null = Start-Sleep -Milliseconds (500)
                                                                           
-                $LogMessage = "Attempting to update text box. Please Wait..."
-                Write-Verbose -Message ($LogMessage) -Verbose
+                                                                          $LogMessage = "Attempting to update the value for UI control `"$($UIControlUpdate.Key)`". Please Wait..."
+                                                                          Write-Verbose -Message ($LogMessage) -Verbose
                                                                           
-                $SynchronizedHashtable.UIWindow.Dispatcher.Invoke([Action]{$SynchronizedHashtable.UIControls.$($TextBoxControlName).Text = $TextBoxUpdate}, 'Normal')
-            }
+                                                                          $SynchronizedHashtable.UIWindow.Dispatcher.Invoke([Action]{$SynchronizedHashtable.UIControls.$($UIControlUpdate.Key).Text = $UIControlUpdate.Value}, 'Normal')
+                                                                      }
                                                                     
           $InvokePSThreadParameters = New-Object -TypeName 'System.Collections.Specialized.OrderedDictionary'
 	          $InvokePSThreadParameters.Await = $True
