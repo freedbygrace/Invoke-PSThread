@@ -157,9 +157,9 @@ Create a runspace.
           $TextBoxUpdateInterval = [System.TimeSpan]::FromSeconds(5)
                                                                     
                                                                     $UIControlUpdateDictionary = New-Object -TypeName 'System.Collections.Specialized.OrderedDictionary'
-                                                                      $UIControlUpdateDictionary.'TXTBOX_001' = "Value1"
-                                                                      $UIControlUpdateDictionary.'TXTBOX_002' = "Value2"
-                                                                      $UIControlUpdateDictionary.'TXTBOX_003' = "Value3"
+                                                                      $UIControlUpdateDictionary.'TXTBOX_001' = "Updated UI Value 1"
+                                                                      $UIControlUpdateDictionary.'TXTBOX_002' = "Updated UI Value 2"
+                                                                      $UIControlUpdateDictionary.'TXTBOX_003' = "Updated UI Value 3"
 
                                                                       $LogMessage = "Pausing script execution for $($TextBoxUpdateInterval.TotalSeconds) second(s). Please Wait..."
                                                                       Write-Verbose -Message ($LogMessage) -Verbose
